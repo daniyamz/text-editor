@@ -6,5 +6,8 @@ import (
 )
 
 func main() {
-	fmt.Println(process.Split("hello, world am here too!"))
+	tokens := process.Split("hello, world am (up) here too! 1F (hex), I will be 10 (bin) years (cap) OLD (low)")
+	tokens = process.BaseConv(tokens)
+	tokens = process.AlphaConv(tokens)
+	fmt.Println(tokens)
 }
