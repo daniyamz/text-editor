@@ -1,31 +1,38 @@
 package process
 
-import "strings"
+import (
+	"strconv"
+	"strings"
+)
 
 func AlphaConv(token []string) []string {
 	var new_aplha []string
 	for _, word := range token {
 		if strings.HasPrefix(word, "(") && strings.HasSuffix(word, ")") {
 			char := word[1 : len(word)-1]
-			//char = strings.ReplaceAll(char, " ", "")
-			switch char {
-			case "up":
-				if len(new_aplha) > 0 {
-					new_aplha[len(new_aplha)-1] = strings.ToUpper(new_aplha[len(new_aplha)-1])
-				}
-			case "low":
-				if len(new_aplha) > 0 {
-					new_aplha[len(new_aplha)-1] = strings.ToLower(new_aplha[len(new_aplha)-1])
-				}
-			case "cap":
-				if len(new_aplha) > 0 {
-					var runes []rune = []rune(new_aplha[len(new_aplha)-1])
-					if runes[0] >= 'a' && runes[0] <= 'z' {
-						runes[0] = runes[0] - 32
-						new_aplha[len(new_aplha)-1] = string(runes)
+			part := strings.Split(char, ",")
+			number := 1
+			part1 := strings.TrimSpace(part[0])
+			if len(part) > 1 {
+				num, err := strconv.Atoi(strings.TrimSpace(part[1]))
+				if err == nil {
+					if num > number {
+						number = num
 					}
 				}
 			}
+			start := len(new_aplha) - number
+			if start < 0 {
+				start = 0
+			}
+			for i := start; i < len(new_aplha); i++ {
+				new_part1 := strings.ToLower(part1)
+				switch new_part1 {
+				case "up":
+					new_part1[i] = strings.ToUpper(new_part1[i])
+				}
+			}
+
 		} else {
 			new_aplha = append(new_aplha, word)
 		}
