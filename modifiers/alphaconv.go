@@ -29,7 +29,15 @@ func AlphaConv(token []string) []string {
 				new_part1 := strings.ToLower(part1)
 				switch new_part1 {
 				case "up":
-					new_part1[i] = strings.ToUpper(new_part1[i])
+					new_aplha[i] = strings.ToUpper(new_aplha[i])
+				case "low":
+					new_aplha[i] = strings.ToLower(new_aplha[i])
+				case "cap":
+					news := []rune(new_aplha[i])
+					if news[0] >= 'a' && news[0] <= 'z' {
+						news[0] = news[0] - 32
+					}
+					new_aplha[i] = string(news)
 				}
 			}
 
