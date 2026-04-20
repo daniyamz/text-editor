@@ -18,8 +18,9 @@ func Alpha(text []string) []string {
 					text[i] = "an"
 				} else {
 					text[i] = "An"
+					text = append(text, text[i])
 				}
-				text = append(text, text[i])
+
 			}
 		}
 	}
