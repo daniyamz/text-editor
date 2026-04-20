@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"os"
-	"strings"
 	process "text-editor/modifiers"
 )
 
@@ -21,7 +20,9 @@ func main() {
 	tokens := process.Split(data)
 	tokens = process.BaseConv(tokens)
 	tokens = process.AlphaConv(tokens)
-	tk := strings.Join(tokens, " ")
+	tokens = process.Alpha(tokens)
+	tk := process.PunctControl(tokens)
+	//tk := strings.Join(tokens, " ")
 	err = os.WriteFile(outputfile, []byte(tk), 0644)
 	if err != nil {
 		fmt.Println("Error", err)
