@@ -21,7 +21,8 @@ func main() {
 	tokens = process.BaseConv(tokens)
 	tokens = process.AlphaConv(tokens)
 	tokens = process.Alpha(tokens)
-	tk := process.PunctControl(tokens)
+	tokens1 := process.PunctControl(tokens)
+	tk := process.QuotControl(tokens1)
 	//tk := strings.Join(tokens, " ")
 	err = os.WriteFile(outputfile, []byte(tk), 0644)
 	if err != nil {

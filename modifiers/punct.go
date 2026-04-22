@@ -19,3 +19,10 @@ func PunctControl(str []string) string {
 	}
 	return strings.Join(str, " ")
 }
+func QuotControl(txt string) string {
+	text := strings.Split(txt, "'")
+	for t := 1; t < len(text); t += 2 {
+		text[t] = strings.TrimSpace(text[t])
+	}
+	return strings.Join(text, "'")
+}
