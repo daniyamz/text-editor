@@ -1,7 +1,9 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"log"
 	"os"
 	process "text-editor/modifiers"
 )
@@ -12,19 +14,31 @@ func main() {
 	}
 	inputfile := os.Args[1]
 	outputfile := os.Args[2]
-	cont, err := os.ReadFile(inputfile)
+	// cont, err := os.ReadFile(inputfile)
+	// if err != nil {
+	// 	fmt.Println("error occured", err)
+	// }
+	cont, err := os.Open(inputfile)
 	if err != nil {
-		fmt.Println("error occured", err)
+		log.Fatal()
 	}
-	data := string(cont)
-	tokens := process.Split(data)
-	tokens = process.BaseConv(tokens)
-	tokens = process.AlphaConv(tokens)
-	tokens = process.Alpha(tokens)
-	tokens1 := process.PunctControl(tokens)
-	tk := process.QuotControl(tokens1)
+	result := ""
+	scanner := bufio.NewScanner(cont)
+	for scanner.Scan() {
+		data := scanner.Text()
+		tokens := process.Split(data)
+		tokens = process.BaseConv(tokens)
+		tokens = process.AlphaConv(tokens)
+		tokens = process.Alpha(tokens)
+		tokens1 := process.PunctControl(tokens)
+		tk := process.QuotControl(tokens1)
+		result += tk + "\n"
+
+	}
+	cont.Close()
+
 	//tk := strings.Join(tokens, " ")
-	err = os.WriteFile(outputfile, []byte(tk), 0644)
+	err = os.WriteFile(outputfile, []byte(result), 0644)
 	if err != nil {
 		fmt.Println("Error", err)
 	}
