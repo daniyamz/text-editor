@@ -21,10 +21,7 @@ func AlphaConv(token []string) []string {
 					}
 				}
 			}
-			start := len(new_aplha) - number
-			if start < 0 {
-				start = 0
-			}
+			start := max(len(new_aplha)-number, 0)
 			for i := start; i < len(new_aplha); i++ {
 				new_part1 := strings.ToLower(part1)
 				switch new_part1 {
