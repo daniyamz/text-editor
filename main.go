@@ -39,12 +39,17 @@ func main() {
 
 	for scanner.Scan() {
 		data := scanner.Text()
-		tokens := process.Split(data)
+		tokens, err := process.Split(data)
+		if err != nil {
+			fmt.Println("Error Occured: ", err)
+			return
+		}
 		tokens = process.BaseConv(tokens)
 		tokens = process.AlphaConv(tokens)
 		tokens, err = process.Alpha(tokens)
 		if err != nil {
 			fmt.Println("occured", err)
+			return
 		}
 		tokens1 := process.PunctControl(tokens)
 		tk, err := process.QuotControl(tokens1)
