@@ -5,40 +5,57 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strings"
 	process "text-editor/modifiers"
 )
 
 func main() {
+	// Validating the number of arguments the user should pass
 	if len(os.Args) < 3 {
 		fmt.Println("Try this: go run . sample.txt result.txt")
+		return
 	}
+
 	inputfile := os.Args[1]
 	outputfile := os.Args[2]
-	// cont, err := os.ReadFile(inputfile)
-	// if err != nil {
-	// 	fmt.Println("error occured", err)
-	// }
+
+	if inputfile != "sample.txt" {
+		fmt.Println("inputfile should be sample.txt")
+		return
+	}
+	//openig the file to read from
 	cont, err := os.Open(inputfile)
 	if err != nil {
 		log.Fatal()
 	}
-	result := ""
+	var result strings.Builder
+	// reading the file content line by line.
 	scanner := bufio.NewScanner(cont)
+	err = scanner.Err()
+	if err != nil {
+		fmt.Println("Error occurd", err)
+		return
+	}
+
 	for scanner.Scan() {
 		data := scanner.Text()
 		tokens := process.Split(data)
 		tokens = process.BaseConv(tokens)
 		tokens = process.AlphaConv(tokens)
-		tokens = process.Alpha(tokens)
+		tokens, err = process.Alpha(tokens)
+		if err != nil {
+			fmt.Println("occured", err)
+		}
 		tokens1 := process.PunctControl(tokens)
 		tk := process.QuotControl(tokens1)
-		result += tk + "\n"
+		result.WriteString(tk)
+		result.WriteString("\n")
 
 	}
 	cont.Close()
 
 	//tk := strings.Join(tokens, " ")
-	err = os.WriteFile(outputfile, []byte(result), 0644)
+	err = os.WriteFile(outputfile, []byte(result.String()), 0644)
 	if err != nil {
 		fmt.Println("Error", err)
 	}
