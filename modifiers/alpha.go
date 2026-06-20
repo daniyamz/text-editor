@@ -2,15 +2,18 @@ package process
 
 import "strings"
 
+// Helper function that validate the characters starting wih a vowel or h both lowercase and uppercase
 func vowel(s string) bool {
 	if s == "" {
 		return false
 	}
+	// vowels to check.
 	vowel := "aeouihHAEOUI"
 	return strings.ContainsRune(vowel, rune(s[0]))
 }
 
-func Alpha(text []string) []string {
+// function that handles the vowel in your input
+func Alpha(text []string) ([]string, error) {
 	for i := 0; i < len(text); i++ {
 		if vowel(string(text[i][0])) && i > 0 {
 			if text[i-1] == "a" || text[i-1] == "A" && i > 0 {
@@ -24,5 +27,5 @@ func Alpha(text []string) []string {
 			}
 		}
 	}
-	return text
+	return text, nil
 }
