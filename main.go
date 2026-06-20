@@ -47,7 +47,11 @@ func main() {
 			fmt.Println("occured", err)
 		}
 		tokens1 := process.PunctControl(tokens)
-		tk := process.QuotControl(tokens1)
+		tk, err := process.QuotControl(tokens1)
+		if err != nil {
+			fmt.Println("Error occured: ", err)
+			return
+		}
 		result.WriteString(tk)
 		result.WriteString("\n")
 
