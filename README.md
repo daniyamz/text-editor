@@ -12,5 +12,8 @@ The objective of this project is making a simple text completion/editing/auto-co
 1. **Main.go:** The file that run the whole program, it's where all the other functions are called.
 2. **Sample.txt:** That's where the program reads from, that's where the user enter text.
 3. **Result.txt:** This is the file the program write after processing the text.
-4. **Modifiers:** This folder contains all the files of the program. Below are the functions
-     
+4. **Modifiers:** This folder contains all the files of the program.
+
+## Functions ##
+1. **alpha.go:** This function check if the first letter of user input is a vowel and string before the string is letter "a", the letter "a" is convereted to a "an".
+2. **punt.go:** This function handles punctuations in user input.  
