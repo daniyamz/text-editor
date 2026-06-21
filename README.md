@@ -15,5 +15,5 @@ The objective of this project is making a simple text completion/editing/auto-co
 4. **Modifiers:** This folder contains all the files of the program.
 
 ## Functions ##
-1. **alpha.go:** This function check if the first letter of user input is a vowel and string before the string is letter "a", the letter "a" is convereted to a "an".
+1. **alpha.go:** This function check if the first letter of user input is a vowel and string before the vowel is letter "a", the letter "a" is converted to "an" and if the litter is an uppercase it is converted to "An" .
 2. **punt.go:** This function handles punctuations in user input.  
