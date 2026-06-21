@@ -5,7 +5,8 @@ import (
 	"strings"
 )
 
-func AlphaConv(token []string) []string {
+// function that convert strings to lower or uppercase and convert a first letter of a string to uppercase.
+func AlphaConv(token []string) ([]string, error) {
 	var new_aplha []string
 	for _, word := range token {
 		if strings.HasPrefix(word, "(") && strings.HasSuffix(word, ")") {
@@ -13,6 +14,7 @@ func AlphaConv(token []string) []string {
 			part := strings.Split(char, ",")
 			number := 1
 			part1 := strings.TrimSpace(part[0])
+			// validating when the content in the bracket are more that one
 			if len(part) > 1 {
 				num, err := strconv.Atoi(strings.TrimSpace(part[1]))
 				if err == nil {
@@ -21,7 +23,10 @@ func AlphaConv(token []string) []string {
 					}
 				}
 			}
-			start := max(len(new_aplha)-number, 0)
+			start := len(new_aplha) - number
+			if start < 0 {
+				start = 0
+			}
 			for i := start; i < len(new_aplha); i++ {
 				new_part1 := strings.ToLower(part1)
 				switch new_part1 {
@@ -42,5 +47,5 @@ func AlphaConv(token []string) []string {
 			new_aplha = append(new_aplha, word)
 		}
 	}
-	return new_aplha
+	return new_aplha, nil
 }
