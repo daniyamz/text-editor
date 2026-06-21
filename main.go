@@ -45,7 +45,7 @@ func main() {
 			return
 		}
 		tokens = process.BaseConv(tokens)
-		tokens = process.AlphaConv(tokens)
+		tokens, err = process.AlphaConv(tokens)
 		tokens, err = process.Alpha(tokens)
 		if err != nil {
 			fmt.Println("occured", err)
